@@ -1,0 +1,3 @@
+#envoirmental variables
+node_modules
+.env
