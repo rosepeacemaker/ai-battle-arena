@@ -30,7 +30,7 @@ app.post("/invoke", async (req,res)=>{
 
     const result = await runGraph(input)
 
-    res.status(2000).json({
+    res.status(200).json({
         message:"Graph executed succcsessfully",
         succsess: true,
         data: result
