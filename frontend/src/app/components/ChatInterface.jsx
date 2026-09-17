@@ -111,23 +111,34 @@ export default function ChatInterface() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-zinc-50 dark:bg-zinc-950 font-sans">
-      <header className="py-4 px-8 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md sticky top-0 z-10 flex justify-center">
-        <h1 className="text-xl font-medium tracking-tight text-zinc-900 dark:text-zinc-50">AI Chat Arena</h1>
+    <div className="flex flex-col h-screen bg-[#F8F5FB] dark:bg-[#271F2E] font-sans text-[#271F2E] dark:text-[#F3ECF8] antialiased selection:bg-[#9333EA]/20 selection:text-[#9333EA]">
+      <header className="py-4 px-8 border-b border-[#EADDF0] dark:border-[#3E304A] bg-white/75 dark:bg-[#271F2E]/75 backdrop-blur-xl sticky top-0 z-20 flex justify-between items-center max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-2.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+          <h1 className="text-lg font-semibold tracking-tight text-[#271F2E] dark:text-white">TrioAI Agents</h1>
+        </div>
+        <div className="text-xs font-medium text-[#7E6C8B] dark:text-[#D4C5E2] bg-[#F2EAFA] dark:bg-[#352A3F] px-3.5 py-1 rounded-full border border-[#E4D5EC] dark:border-[#493957]">
+          Dual Model + Judge System
+        </div>
       </header>
 
-      <main className="flex-1 overflow-y-auto px-4 md:px-8 py-8 w-full max-w-6xl mx-auto flex flex-col">
+      <main className="flex-1 overflow-y-auto no-scrollbar px-6 md:px-12 py-10 w-full max-w-5xl mx-auto flex flex-col">
         {messages.length === 0 && !isLoading ? (
-          <div className="flex-1 flex items-center justify-center text-zinc-400">
-            <div className="text-center">
-              <h2 className="text-2xl font-light mb-2 text-zinc-600 dark:text-zinc-300">Welcome to the Arena</h2>
-              <p>Type a problem below to see two AI solutions go head-to-head.</p>
+          <div className="flex-1 flex flex-col items-center justify-center text-center my-auto py-16 animate-in fade-in duration-700">
+            <div className="w-16 h-16 rounded-3xl bg-[#271F2E]/5 dark:bg-[#A855F7]/15 border border-[#271F2E]/10 dark:border-[#A855F7]/30 flex items-center justify-center mb-6 text-[#7E22CE] dark:text-[#C084FC] text-2xl shadow-sm">
+              ⚡
             </div>
+            <h2 className="text-3xl font-normal tracking-tight mb-3 text-[#271F2E] dark:text-zinc-100">
+              Welcome to <span className="font-semibold text-[#8B5CF6] dark:text-[#C084FC]">TrioAI Agents</span>
+            </h2>
+            <p className="text-[#6E5C7D] dark:text-[#CBBACC] max-w-md text-base leading-relaxed">
+              Ask any coding question to watch two AI models craft solutions head-to-head while an expert judge evaluates the winner.
+            </p>
           </div>
         ) : (
-          <>
+          <div className="space-y-10">
             {messages.map((msg) => (
-              <div key={msg.id} className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500 ease-out">
+              <div key={msg.id} className="animate-in fade-in slide-in-from-bottom-6 duration-500 ease-out">
                 <UserMessage message={msg.problem} />
                 <ArenaResponse
                   solution1={msg.solution_1}
@@ -138,34 +149,34 @@ export default function ChatInterface() {
             ))}
 
             {isLoading && (
-              <div className="mb-12 animate-pulse">
-                <div className="flex justify-center items-center py-6 gap-3 text-zinc-500 dark:text-zinc-400">
-                  <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                  <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                  <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce"></div>
-                  <span className="ml-2 text-sm font-medium">Generating AI solutions & judging competition...</span>
+              <div className="py-8 animate-pulse">
+                <div className="flex justify-center items-center gap-3 text-[#7E6C8B] dark:text-[#CBBACC]">
+                  <div className="w-2.5 h-2.5 bg-[#8B5CF6] dark:bg-[#C084FC] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                  <div className="w-2.5 h-2.5 bg-[#8B5CF6] dark:bg-[#C084FC] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                  <div className="w-2.5 h-2.5 bg-[#8B5CF6] dark:bg-[#C084FC] rounded-full animate-bounce"></div>
+                  <span className="ml-2 text-sm font-medium tracking-wide">TrioAI Agents are thinking and evaluating solutions...</span>
                 </div>
               </div>
             )}
-          </>
+          </div>
         )}
         <div ref={endOfMessagesRef} />
       </main>
 
-      <div className="p-6 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800">
+      <div className="py-6 px-6 md:px-12 bg-white/80 dark:bg-[#271F2E]/80 backdrop-blur-xl border-t border-[#EADDF0] dark:border-[#3E304A]">
         <div className="max-w-4xl mx-auto">
           <form onSubmit={handleSend} className="relative flex items-center">
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Ask a coding question..."
+              placeholder="Ask TrioAI Agents a coding problem..."
               disabled={isLoading}
-              className="w-full bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 border-none rounded-full py-4 pl-6 pr-16 focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-zinc-400 transition-shadow shadow-sm hover:shadow-md text-lg disabled:opacity-60"
+              className="w-full bg-[#F2EAFA]/70 dark:bg-[#34283F]/80 text-[#271F2E] dark:text-[#F3ECF8] border border-[#E2D2EB] dark:border-[#4B3B59] rounded-full py-4 pl-7 pr-16 focus:ring-2 focus:ring-[#8B5CF6]/50 focus:border-[#8B5CF6] focus:outline-none placeholder-[#A08EB0] dark:placeholder-[#9C89AC] transition-all shadow-sm hover:shadow text-base disabled:opacity-60"
             />
             <button
               type="submit"
-              className="absolute right-2 bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-full transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+              className="absolute right-2.5 bg-[#271F2E] hover:bg-[#3B2D46] dark:bg-[#8B5CF6] dark:hover:bg-[#7C3AED] active:scale-95 text-white p-3 rounded-full transition-all flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed shadow-md shadow-[#271F2E]/10 dark:shadow-purple-950/50"
               disabled={!inputValue.trim() || isLoading}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
