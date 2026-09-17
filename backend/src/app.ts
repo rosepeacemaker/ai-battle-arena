@@ -6,7 +6,7 @@ import cors from "cors";
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5174",
     methods: ["GET", "POST"],
     credentials: true
 }))
@@ -31,8 +31,8 @@ app.post("/invoke", async (req,res)=>{
     const result = await runGraph(input)
 
     res.status(200).json({
-        message:"Graph executed succcsessfully",
-        succsess: true,
+        message:"Graph executed successfully",
+        success: true,
         data: result
     })
 

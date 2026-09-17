@@ -10,7 +10,7 @@ import { createAgent,HumanMessage,providerStrategy ,toolStrategy } from "langcha
 const state = new StateSchema({
     problem: z.string().default(""),
     solution_1: z.string().default(""),
-    soluiton_2: z.string().default(""),
+    solution_2: z.string().default(""),
         judge: z.object({
             solution_1_score: z.number().default(0),
             solution_2_score: z.number().default(0),
@@ -36,7 +36,7 @@ const solutionNode:GraphNode<typeof state> = async (state) =>{
  * 
  */
 const judgeNode:GraphNode<typeof state> = async (state) => {
-        const { problem, solution_1, soluiton_2 } = state
+        const { problem, solution_1, solution_2 } = state
 
 const judge = createAgent({
         model:geminiModel,
@@ -56,7 +56,7 @@ const judgeResponse = await judge.invoke({
         new HumanMessage(`
             Problem: ${problem}
             Solution 1: ${solution_1}
-            Solution 2: ${soluiton_2}
+            Solution 2: ${solution_2}
             Please evaluate the solutions and provide scores and reasoning.
             `)
         ]
