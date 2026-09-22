@@ -67,14 +67,14 @@ export default function ArenaResponse({ solution1, solution2, judge }) {
                 code: ({node, inline, className, children, ...props}) => {
                   return !inline ? (
                     <div className="rounded-2xl overflow-hidden my-5 border border-[#E4D5EC] dark:border-[#4A3959] shadow-sm">
-                       <pre className="p-5 bg-[#1B1521] overflow-x-auto no-scrollbar text-sm text-[#F3ECF8] font-mono">
+                       <pre className="p-5 bg-[#1B1521] overflow-x-auto no-scrollbar text-sm text-[#1B0D16] font-mono">
                          <code className={className} {...props}>
                            {children}
                          </code>
                        </pre>
                     </div>
                   ) : (
-                    <code className="bg-[#F2EAFA] dark:bg-[#433451] text-[#271F2E] dark:text-[#F3ECF8] px-2 py-0.5 rounded-md text-sm font-mono border border-[#E2D2EB]/60 dark:border-[#524063]" {...props}>
+                    <code className="bg-[#F2EAFA] dark:bg-[#433451] text-[#271F2E] dark:text-[#1B0D16] px-2 py-0.5 rounded-md text-sm font-mono border border-[#E2D2EB]/60 dark:border-[#524063]" {...props}>
                       {children}
                     </code>
                   )
@@ -116,4 +116,4 @@ export default function ArenaResponse({ solution1, solution2, judge }) {
     </div>
   );
 }
-
+
