@@ -15,9 +15,9 @@ const MOCK_RESPONSE = {
 };
 
 export default function ChatInterface() {
-  const [ messages, setMessages ] = useState([]);
-  const [ inputValue, setInputValue ] = useState('');
-  const [ isLoading, setIsLoading ] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const endOfMessagesRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -26,14 +26,14 @@ export default function ChatInterface() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [ messages, isLoading ]);
+  }, [messages, isLoading]);
 
   const parseApiResponse = (responseData) => {
     if (!responseData) return MOCK_RESPONSE;
 
     // Check if result is wrapped under result, output, or at top level
-    let target = responseData.result !== undefined 
-      ? responseData.result 
+    let target = responseData.result !== undefined
+      ? responseData.result
       : (responseData.output !== undefined ? responseData.output : responseData);
 
     // Parse stringified JSON if needed
@@ -87,7 +87,7 @@ export default function ChatInterface() {
         judge: parsedData.judge || null
       };
 
-      setMessages((prevMessages) => [ ...prevMessages, newMessage ]);
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
     } catch (error) {
       console.error("Error invoking AI backend:", error);
 
@@ -104,14 +104,14 @@ export default function ChatInterface() {
         }
       };
 
-      setMessages((prevMessages) => [ ...prevMessages, errorMessage ]);
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#F8F5FB] dark:bg-[#271F2E] font-sans text-[#271F2E] dark:text-[#F3ECF8] antialiased selection:bg-[#9333EA]/20 selection:text-[#9333EA]">
+    <div className="container flex flex-col h-screen bg-[#F8F5FB] dark:bg-[#271F2E] font-sans text-[#271F2E] dark:text-[#F3ECF8] antialiased selection:bg-[#9333EA]/20 selection:text-[#9333EA]">
       <header className="py-4 px-8 border-b border-[#EADDF0] dark:border-[#3E304A] bg-white/75 dark:bg-[#271F2E]/75 backdrop-blur-xl sticky top-0 z-20 flex justify-between items-center max-w-7xl mx-auto w-full">
         <div className="flex items-center gap-2.5">
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
